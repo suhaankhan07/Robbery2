@@ -104,15 +104,48 @@ class Game {
 
  
   if(allPlayers !== undefined) {
+    
     image(Board,displayWidth/25,displayHeight/19,displayWidth-200,displayHeight/1.3);
-      var index = 0;
-      var x;
-      var y = 130;
+    var index = 0;
+    var x=250;
+    var y=130;
+
+   if(keyIsDown(RIGHT_ARROW) && player.index !== null) {
+    //image(Board,displayWidth/25,displayHeight/19,displayWidth-200,displayHeight/1.3);
+    //var index = 0;
+    //var x;
+    //var y = 130;
+    
+    for(var plr in allPlayers){
+      index = index + 1; 
+     
+     x = allPlayers[plr].distance - displayWidth;
+     //y = allPlayers[plr].distance - displayHeight - 1300;
+     Robbers[index-1].x = x;
+     Robbers[index-1].y = y;   
+    
+    if(index === player.index){
+       stroke(10);
+       fill("red")
+       ellipse(x,y,110,110);
+       Robbers[index-1].shapeColor = "red";
+      }
+   }
+      player.distance +=30;
+      player.update();
+    }
+
+  if(keyIsDown(LEFT_ARROW) && player.index !== null) {
+    //image(Board,displayWidth/25,displayHeight/19,displayWidth-200,displayHeight/1.3);
+      //var index = 0;
+      //var x;
+      //var y = 130;
       
       for(var plr in allPlayers){
         index = index + 1; 
        
        x = allPlayers[plr].distance - displayWidth;
+       //y = allPlayers[plr].distance - displayHeight - 1300;
        Robbers[index-1].x = x;
        Robbers[index-1].y = y;   
       
@@ -123,25 +156,63 @@ class Game {
          Robbers[index-1].shapeColor = "red";
         }
      }
-     
-    
-
-   if(keyIsDown(RIGHT_ARROW) && player.index !== null) {
-      player.distance +=30;
-      player.update();
-    }
-
-  if(keyIsDown(LEFT_ARROW) && player.index !== null) {
       player.distance -= 30;
       player.update();
     }
   
-    if(keyIsDown(DOWN_ARROW) && player.distance > 3560) {
-      player.distance = 200;
+    if(keyIsDown(DOWN_ARROW) && index !== null) {
+      
+      //var index = 0;
+     //var x =250;
+      //var y;
+      
+      for(var plr in allPlayers){
+        index = index + 1; 
+       
+       //x = allPlayers[plr].distance - displayWidth;
+       y = allPlayers[plr].distance - displayHeight;
+       Robbers[index-1].x = x;
+       Robbers[index-1].y = y;   
+      
+      if(index === player.index){
+         stroke(10);
+         fill("red")
+         ellipse(x,y,110,110);
+         Robbers[index-1].shapeColor = "red";
+        }
+     }
+      player.distance += 30;
       player.update();
-    }  
+    }
+    
+    if(keyIsDown(UP_ARROW) && player.index !== null) {
+      //image(Board,displayWidth/25,displayHeight/19,displayWidth-200,displayHeight/1.3);
+       
+        
+        for(var plr in allPlayers){
+          index = index + 1; 
+         
+         //x = allPlayers[plr].distance - displayWidth;
+         y = allPlayers[plr].distance - displayHeight;
+         Robbers[index-1].x = x;
+         Robbers[index-1].y = y;   
+        
+        if(index === player.index){
+           stroke(10);
+           fill("red")
+           ellipse(x,y,110,110);
+           Robbers[index-1].shapeColor = "red";
+          }
+       }
+        player.distance -= 30;
+        player.update();
+      }
+    
+    } 
   
-  }   
+     
+
+  
 
     if(player.distance > displayWidth - 50 && player.distance > displayHeight - 50) {
       gameState = 2;
