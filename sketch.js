@@ -1,23 +1,19 @@
-
 const Engine = Matter.Engine;
 const World= Matter.World;  
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var gameState = 0;
-var allPlayers;
- var Robber1,Robber2,Robbers;
- var treasureBox, gun; 
- var dice1,dice2;
+var allPlayers; 
  var backgroundImage;
  var form, player, game, rank;
  var playerCount;
- var RobberyImg, PlayImg, RestartImg;
  var dice,specialDice;
  var gun1,gun2,gun3,gun4;
  var treasureBox1,treasureBox2,treasureBox3,treasureBox4;
  var RobberyImg,PlayImg,RestartImg,Board, Robber, Winner, Loser, Pistol, treasureBox;
-//var index;
+ var Robber1,Robber2,Robbers;
+ //var index;
 
 function preload() {
   RobberyImg = loadImage("images/Robbery.png");
@@ -58,11 +54,4 @@ function draw() {
   if(gameState === 2) {
     game.end();
   }
- 
-
-
-
-  drawSprites();
 }
-
-//function keyPressed
