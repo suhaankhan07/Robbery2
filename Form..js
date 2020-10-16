@@ -3,12 +3,13 @@ class Form {
      this.input = createInput("Name");
      this.button = createButton('Play');
      this.greeting = createElement('h3');
-     this.title = createElement('h2');
-     this.reset = createButton('RESET');
-     this.dice = createButton("CLICK ME ROLL DICE")
-     this.specialDice = createButton("CLICK ME TO ROLL SPECIAL SPOT")
+     this.title = createElement('h1');
+     this.reset = createButton('RESTART');
+     this.dice = createButton("CLICK ME TO ROLL DICE")
+     this.specialDice = createButton("CLICK ME TO ROLL SPECIAl DICE")
      this.diceInput= createElement('h4');
-     this.specialDiceInput = createElement('h4')
+     this.specialDiceInput = createElement('h4');
+     this.resetInput = createElement('h3');
     }
     hide() {
       this.greeting.hide();
@@ -31,9 +32,10 @@ class Form {
 
       this.specialDice.position(400,20);
 
-      this.reset.position(displayWidth-100,20);
-      //this.reset.addImage(RestartImg);
+      this.reset.position(displayWidth-400,20);
+      image(RestartImg,displayWidth-400,20);
 
+      // this.button.("red");
       this.button.mousePressed(()=>{
        this.input.hide();
        this.button.hide();
@@ -49,6 +51,8 @@ class Form {
       this.reset.mousePressed(()=>{
         player.updateCount(0);
         game.update(0);
+        this.resetInput.html("Refresh to play again. Come on, what are you waiting for?");
+        this.resetInput.position(displayWidth/2-200,displayHeight/2 -300);
       });
 
       this.dice.mousePressed(()=>{
