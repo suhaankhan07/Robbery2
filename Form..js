@@ -10,6 +10,8 @@ class Form {
      this.diceInput= createElement('h4');
      this.specialDiceInput = createElement('h4');
      this.resetInput = createElement('h3');
+     this.rules = createButton('RULES')
+     this.rulesInput = createElement('h3');
     }
     hide() {
       this.greeting.hide();
@@ -33,12 +35,22 @@ class Form {
       this.specialDice.position(400,20);
 
       this.reset.position(displayWidth-400,20);
-      image(RestartImg,displayWidth-400,20);
+      //image(RestartImg,displayWidth-400,20);
+      
+      this.rules.position(100,200);
+
+      this.rules.mousePressed(()=>{
+        
+        this.rulesInput.html("Roll the dice and move that many up every turn. </br>If you land on the treasure box, roll the special dice and go that many up. </br>Make sure to not land on the gun. </br>You are arrested, roll the special dice and go that many down. </br>Use arrow keys to move. </br>First to make it to 50 wins. </br></br>HOPE YOU ENJOY!!");
+        this.rulesInput.position(170,200);
+      })
 
       // this.button.("red");
       this.button.mousePressed(()=>{
        this.input.hide();
        this.button.hide();
+       this.rules.hide();
+       this.rulesInput.hide();
        player.name = this.input.value();
        playerCount+=1;
        player.index = playerCount;
@@ -51,8 +63,9 @@ class Form {
       this.reset.mousePressed(()=>{
         player.updateCount(0);
         game.update(0);
-        this.resetInput.html("Refresh to play again. Come on, what are you waiting for?");
+        this.resetInput.html("WARNING: THIS WILL END GAME;?");
         this.resetInput.position(displayWidth/2-200,displayHeight/2 -300);
+        location.reload();
       });
 
       this.dice.mousePressed(()=>{
@@ -72,6 +85,7 @@ class Form {
         this.specialDiceInput.position(480,20);
         console.log(specialDice);
       })
-
+    
+      
     }
 }
