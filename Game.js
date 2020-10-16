@@ -29,7 +29,7 @@ class Game {
      form.display();
     }
 
-   Robber1 = createSprite(100,100,20,20);
+    Robber1 = createSprite(100,100,20,20);
     Robber1.addImage("Robber1",Robber);
     Robber1.scale = 0.3;
     
@@ -37,6 +37,7 @@ class Game {
     Robber2.addImage("Robber2",Robber);
     Robber2.scale = 0.3;
 
+    
     gun1 = createSprite(random(100,1800),random(100,800));
   gun1.addImage("gun1",Pistol);
   gun1.scale = 0.08;
@@ -59,23 +60,24 @@ class Game {
   treasureBox1.scale = 0.2;
   treasureBox1.visible = false;
   treasureBox2 = createSprite(random(100,1800),random(100,800));
-  treasureBox2.addImage("treasureBox1",treasureBox);
+  treasureBox2.addImage("treasureBox2",treasureBox);
   treasureBox2.scale = 0.2;
   treasureBox2.visible = false;
   treasureBox3 = createSprite(random(100,1800),random(100,800));
-  treasureBox3.addImage("treasureBox1",treasureBox);
+  treasureBox3.addImage("treasureBox3",treasureBox);
   treasureBox3.scale = 0.2;
   treasureBox3.visible = false;
   treasureBox4 = createSprite(random(100,1800),random(100,800));
-  treasureBox4.addImage("treasureBox1",treasureBox);
+  treasureBox4.addImage("treasureBox4",treasureBox);
   treasureBox4.scale = 0.2;
   treasureBox4.visible = false;
 
   Robber1.visible = false;
   Robber2.visible = false;
-
-    Robbers = [Robber1,Robber2];
   
+  Robbers = [Robber1,Robber2];
+
+  //index = 0;  
      
   
   }
@@ -97,46 +99,50 @@ class Game {
   Robber1.visible = true;
   Robber2.visible = true;
 
- 
-
   Player.getPlayerInfo();
 
+
+ 
   if(allPlayers !== undefined) {
     image(Board,displayWidth/25,displayHeight/19,displayWidth-200,displayHeight/1.3);
-    var index = 0;
-
-    var x; 
-    var y;
-
-    for(var plr in allPlayers) {
-      index = index + 1;
-
-      x = displayWidth - allPlayers[plr].distance;
-      y = displayHeight - allPlayers[plr].distance;
- 
-       //Robbers[index-1].x = x;
-       //Robbers[index-1].y = y;
-    
-      if(index === player.index) {
-        stroke(10);
-        fill("white");
-        ellipse(x,y,40,40)
-        Robbers[index-1].shapeColor = "red";
-      }
+      var index = 0;
+      var x;
+      var y = 130;
+      
+      for(var plr in allPlayers){
+        index = index + 1; 
+       
+       x = allPlayers[plr].distance - displayWidth;
+       Robbers[index-1].x = x;
+       Robbers[index-1].y = y;   
+      
+      if(index === player.index){
+         stroke(10);
+         fill("red")
+         ellipse(x,y,110,110);
+         Robbers[index-1].shapeColor = "red";
+        }
      }
+     
+    
+
+   if(keyIsDown(RIGHT_ARROW) && player.index !== null) {
+      player.distance +=30;
+      player.update();
     }
 
-   if(keyDown(RIGHT_ARROW) && player.index !== null) {
-    player.distace +=50;
-     player.update();
+  if(keyIsDown(LEFT_ARROW) && player.index !== null) {
+      player.distance -= 30;
+      player.update();
     }
+  
+    if(keyIsDown(DOWN_ARROW) && player.distance > 3560) {
+      player.distance = 200;
+      player.update();
+    }  
+  
+  }   
 
-  if(keyDown(UP_ARROW) && player.index !== null) {
-    player.distance += 50;
-    player.distance = displayWidth - player.distance;
-    player.update();
-    }
- 
     if(player.distance > displayWidth - 50 && player.distance > displayHeight - 50) {
       gameState = 2;
       image(Winner,displayWidth/2,displayHeight + 100);
